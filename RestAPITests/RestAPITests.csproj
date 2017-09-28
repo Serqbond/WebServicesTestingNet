@@ -71,7 +71,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\AllCountries\AllcountriesResponse.cs" />
-    <Compile Include="Models\AllCountries\CountryInfo.cs" />
     <Compile Include="Models\AllCountries\RestResponse.cs" />
     <Compile Include="Models\AllCountries\Result.cs" />
     <Compile Include="Models\Country\CountryInfo.cs" />
