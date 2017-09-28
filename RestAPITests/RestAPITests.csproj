@@ -78,6 +78,8 @@
     <Compile Include="Models\Country\StateResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\AllCountriesTests.cs" />
+    <Compile Include="Tests\AllStatesTest.cs" />
+    <Compile Include="Tests\CountriesTest.cs" />
     <Compile Include="Tests\CountryListTest.cs" />
     <Compile Include="Tests\FunctionalTest.cs" />
     <Compile Include="Tests\SearchTests.cs" />
