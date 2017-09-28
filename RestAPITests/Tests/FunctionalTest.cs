@@ -13,12 +13,12 @@ namespace RestAPITests.Tests
         {
             client = new HttpClient();       
             string baseHost = Environment.GetEnvironmentVariable("server.host");          
-            Console.WriteLine(baseHost);
+            Console.WriteLine("Printed if env var exists " + baseHost);
 
             if (baseHost == null)
             {
                 baseHost = "http://services.groupkt.com";
-                Console.WriteLine(baseHost);
+                Console.WriteLine("Printed if env var does not exist " + baseHost);
             }
 
             Uri BaseAddress = new Uri(baseHost);
