@@ -11,16 +11,13 @@ namespace RestAPITests.Tests
 {
     [TestFixture]    
     public class AllCountriesTests : FunctionalTest
-    {
-        HttpClient client = new HttpClient();
-        private Uri BaseAddress => new Uri("http://services.groupkt.com");
+    {        
         private string BasePath => "/country";        
 
         [Test]
         public void GetAllCountriesTest()
         {
             Console.WriteLine("GetAllCountriesTest " + System.Threading.Thread.CurrentThread.Name);
-            client.BaseAddress = BaseAddress;
             var response = client.GetAsync(BasePath + "/get/all").Result;
             Assert.AreEqual(response.StatusCode, HttpStatusCode.OK, $"Expected {HttpStatusCode.OK}, but was {response.StatusCode}");
             response = client.SendAsync(new HttpRequestMessage(HttpMethod.Options, BasePath + "/get/all")).Result;
@@ -31,7 +28,6 @@ namespace RestAPITests.Tests
         public void GetCountryByIsoCode()
         {
             Console.WriteLine("GetCountryByIsoCode " + System.Threading.Thread.CurrentThread.Name);
-            client.BaseAddress = BaseAddress;
             var response = client.GetAsync(BasePath + "/get/iso2code/IN").Result.Content.ReadAsStringAsync().Result;            
             AllcountriesResponse allcountriesResponse = JsonConvert.DeserializeObject<AllcountriesResponse>(response);
 
@@ -42,7 +38,6 @@ namespace RestAPITests.Tests
         public void NoMatchingCountry()
         {
             Console.WriteLine("NoMatchingCountry " + System.Threading.Thread.CurrentThread.Name);
-            client.BaseAddress = BaseAddress;
             var response = client.GetAsync(BasePath + "/get/iso2code/IU").Result.Content.ReadAsStringAsync().Result;
             StateResponse stateResponse = JsonConvert.DeserializeObject<StateResponse>(response);
             Assert.That(stateResponse.CountryResponse.Messages.First(), Does.Contain("More webservices"));

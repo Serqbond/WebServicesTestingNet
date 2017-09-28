@@ -9,9 +9,7 @@ namespace RestAPITests.Tests
 {
     [TestFixture]
     public class SearchTests : FunctionalTest
-    {
-        HttpClient client = new HttpClient();
-        private Uri BaseAddress => new Uri("http://services.groupkt.com");
+    {        
         private string BasePath => "/state";
 
         [Test]
@@ -28,7 +26,6 @@ namespace RestAPITests.Tests
                 Name = "Washington"
             };
 
-            client.BaseAddress = BaseAddress;
             string response = client.GetAsync(BasePath + "/search/USA?text=wash").Result.Content.ReadAsStringAsync().Result;
 
             StateResponse countryServerResponse = JsonConvert.DeserializeObject<StateResponse>(response);
@@ -59,7 +56,6 @@ namespace RestAPITests.Tests
                 Name = "Andhra Pradesh"
             };
 
-            client.BaseAddress = BaseAddress;
             string response = client.GetAsync(BasePath + "/search/IND?text=pradesh").Result.Content.ReadAsStringAsync().Result;
 
             StateResponse countryServerResponse = JsonConvert.DeserializeObject<StateResponse>(response);

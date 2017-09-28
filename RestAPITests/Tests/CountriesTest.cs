@@ -13,9 +13,7 @@ namespace RestAPITests.Tests
 {
     [TestFixture]
     public class CountriesTest : FunctionalTest
-    {
-        HttpClient client = new HttpClient();
-        private Uri BaseAddress => new Uri("http://services.groupkt.com");
+    {        
         private string BasePath => "/country";
 
         public static IEnumerable DifferentCountries
@@ -37,7 +35,6 @@ namespace RestAPITests.Tests
                 Name = country, Alpha2_code = alphacode2, Alpha3_code = alphacode3
             };
 
-            client.BaseAddress = BaseAddress;
             string response = client.GetAsync("/country/get/all").Result.Content.ReadAsStringAsync().Result;
 
             AllcountriesResponse allcountriesResponse = JsonConvert.DeserializeObject<AllcountriesResponse>(response);

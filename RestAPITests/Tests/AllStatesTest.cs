@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System.Net.Http;
@@ -12,16 +9,13 @@ using RestAPITests.Models.Country;
 namespace RestAPITests.Tests
 {
     public class AllStatesTest : FunctionalTest
-    {
-        HttpClient client = new HttpClient();
-        private Uri BaseAddress => new Uri("http://services.groupkt.com");
+    {        
         private string BasePath => "/state";
 
         [Test]
         public void GetStatusCodeTestCase()
         {
             Console.WriteLine("GetStatusCodeTestCase " + System.Threading.Thread.CurrentThread.Name);
-            client.BaseAddress = BaseAddress;
             var actualStatusCode = client.GetAsync(BasePath + "/get/IND/UP").Result.StatusCode;
             Assert.AreEqual(HttpStatusCode.OK, actualStatusCode);            
         }
@@ -30,7 +24,6 @@ namespace RestAPITests.Tests
         public void GetCapitalWorks()
         {
             Console.WriteLine("GetCapitalWorks " + System.Threading.Thread.CurrentThread.Name);
-            client.BaseAddress = BaseAddress;
             var actualCountryInfo = client.GetAsync(BasePath + "/get/IND/UP").Result.Content.ReadAsStringAsync().Result;
             StateResponse sp = JsonConvert.DeserializeObject<StateResponse>(actualCountryInfo);
             Assert.That(sp.CountryResponse.CountryInfo.First().Capital, Is.EqualTo("Lucknow"));
@@ -40,7 +33,6 @@ namespace RestAPITests.Tests
         public void GetJsonBody()
         {
             Console.WriteLine("GetJsonBody " + System.Threading.Thread.CurrentThread.Name);
-            client.BaseAddress = BaseAddress;
             string response = client.GetAsync(BasePath + "/get/IND/UP").Result.Content.ReadAsStringAsync().Result;
             StateResponse stateResponse = JsonConvert.DeserializeObject<StateResponse>(response);
             Assert.AreEqual("Lucknow", stateResponse.CountryResponse.CountryInfo.First().Capital);
@@ -50,7 +42,6 @@ namespace RestAPITests.Tests
         public void GetJsonBodyAndOtherHost()
         {
             Console.WriteLine("GetJsonBodyAndOtherHost " + System.Threading.Thread.CurrentThread.Name);
-            client.BaseAddress = BaseAddress;
             string response = client.GetAsync(BasePath + "/get/IND/UP").Result.Content.ReadAsStringAsync().Result;
             StateResponse stateResponse = JsonConvert.DeserializeObject<StateResponse>(response);
             Assert.AreEqual("Lucknow", stateResponse.CountryResponse.CountryInfo.First().Capital);
