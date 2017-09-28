@@ -18,9 +18,11 @@ namespace RestAPITests.Tests
             if (baseHost == null)
             {
                 baseHost = "http://services.groupkt.com";
-                Uri BaseAddress = new Uri(baseHost);
-                client.BaseAddress = BaseAddress;
+                Console.WriteLine(baseHost);
             }
+
+            Uri BaseAddress = new Uri(baseHost);
+            client.BaseAddress = BaseAddress;
         }
     }
 }
