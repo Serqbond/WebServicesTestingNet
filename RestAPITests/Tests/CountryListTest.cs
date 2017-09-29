@@ -19,7 +19,8 @@ namespace RestAPITests.Tests
         public void ListContainsUkraine()
         {
             Console.WriteLine("ListContainsUkraine " + System.Threading.Thread.CurrentThread.Name);
-            AllcountriesResponse allcountriesResponse = restClient.GetResponseAsBusinessEntity<AllcountriesResponse>(CountryGetAll);                
+            AllcountriesResponse allcountriesResponse = restClient.HttpGetRequest.
+                GetResponseAsBusinessEntity<AllcountriesResponse>(CountryGetAll);                
             Assert.AreEqual("UA", allcountriesResponse.RestResponse.Result.First(country => country.Name == "Ukraine").Alpha2_code);
         }
 
@@ -28,7 +29,8 @@ namespace RestAPITests.Tests
         {
             Console.WriteLine("ListContainsAlgeriaResult " + System.Threading.Thread.CurrentThread.Name);
             Result expectedAlgeria = new Result() {Name = "Algeria", Alpha2_code = "DZ", Alpha3_code = "DZA"};
-            AllcountriesResponse allcountriesResponse = restClient.GetResponseAsBusinessEntity<AllcountriesResponse>(CountryGetAll);
+            AllcountriesResponse allcountriesResponse = restClient.HttpGetRequest.
+                GetResponseAsBusinessEntity<AllcountriesResponse>(CountryGetAll);
             Result actualAlgeria = allcountriesResponse.RestResponse.Result.First(country => country.Name == "Algeria");
             Assert.AreEqual(expectedAlgeria.ToString(), actualAlgeria.ToString());
         }

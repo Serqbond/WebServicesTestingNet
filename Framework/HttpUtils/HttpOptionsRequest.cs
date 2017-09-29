@@ -3,7 +3,7 @@ using System.Net.Http;
 
 namespace Framework.HttpUtils
 {
-    class HttpOptionsRequest
+    public class HttpOptionsRequest
     {
         private HttpClient Client;
 

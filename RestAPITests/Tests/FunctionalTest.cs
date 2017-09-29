@@ -6,8 +6,7 @@ using Framework.HttpUtils;
 namespace RestAPITests.Tests
 {
     public class FunctionalTest
-    {
-        protected HttpClient client;
+    {        
         protected RestClient restClient;
 
         [SetUp]

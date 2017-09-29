@@ -27,7 +27,8 @@ namespace RestAPITests.Tests
                 Name = "Washington"
             };
             
-            StateResponse countryServerResponse = restClient.GetResponseAsBusinessEntity<StateResponse>(SearchState("USA", "wash"));
+            StateResponse countryServerResponse = restClient.HttpGetRequest.
+                GetResponseAsBusinessEntity<StateResponse>(SearchState("USA", "wash"));
             
             CountryInfo actual = countryServerResponse.CountryResponse
                 .CountryInfo
@@ -51,7 +52,8 @@ namespace RestAPITests.Tests
                 Name = "Andhra Pradesh"
             };
             
-            StateResponse countryServerResponse = restClient.GetResponseAsBusinessEntity<StateResponse>(SearchState("IND", "pradesh"));
+            StateResponse countryServerResponse = restClient.HttpGetRequest.
+                GetResponseAsBusinessEntity<StateResponse>(SearchState("IND", "pradesh"));
 
             CountryInfo actualIndia = countryServerResponse.CountryResponse
                 .CountryInfo

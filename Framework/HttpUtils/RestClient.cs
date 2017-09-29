@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Net.Http;
-using System.Net;
-using Newtonsoft.Json;
 
 namespace Framework.HttpUtils
 {
     public class RestClient
     {
-        private HttpClient Client = new HttpClient();        
-        private HttpGetRequest GetRequest;
-        HttpOptionsRequest OptionsRequest;
+        private HttpClient Client = new HttpClient();
+        public HttpGetRequest HttpGetRequest { get; private set; }
+        public HttpOptionsRequest HttpOptionsRequest { get; private set; }
+        public HttpPostRequest HttpPostRequest { get; private set; }
 
         public RestClient()
         {                 
@@ -17,37 +16,21 @@ namespace Framework.HttpUtils
         }
 
         public RestClient(string baseHost)
-        {
-            Client = new HttpClient(); 
+        {            
             Client.BaseAddress = new Uri(baseHost);
             InitRestOperations();
-        }
+        }        
 
-        public HttpResponseMessage GetResponse(string requestUri)
+        public void SetNewHost(string hostName)
         {
-            return GetRequest.GetResponse(requestUri);
-        }
-
-        public HttpStatusCode GetResponseStatusCode(string requestUri)
-        {
-            return GetRequest.GetResponseStatusCode(requestUri);
-        }
-
-        public T GetResponseAsBusinessEntity<T>(string requestUri) where T : new()
-        {
-            var result = Client.GetAsync(requestUri).Result.Content.ReadAsStringAsync().Result;
-            return JsonConvert.DeserializeObject<T>(result);
-        }
-
-        public HttpStatusCode OptionsResponseStatusCode(string requestUri)
-        {
-            return OptionsRequest.OptionsResponseStatusCode(requestUri);
-        }
+            Client.BaseAddress = new Uri(hostName);
+        }        
 
         private void InitRestOperations()
         {
-            GetRequest = new HttpGetRequest(Client);
-            OptionsRequest = new HttpOptionsRequest(Client);
+            HttpGetRequest = new HttpGetRequest(Client);
+            HttpOptionsRequest = new HttpOptionsRequest(Client);
+            HttpPostRequest = new HttpPostRequest(Client);
         }
     }
 }

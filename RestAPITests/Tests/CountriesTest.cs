@@ -35,7 +35,8 @@ namespace RestAPITests.Tests
                 Name = country, Alpha2_code = alphacode2, Alpha3_code = alphacode3
             };
             
-            AllcountriesResponse allcountriesResponse = restClient.GetResponseAsBusinessEntity<AllcountriesResponse>(CountryGetAll);
+            AllcountriesResponse allcountriesResponse = restClient.HttpGetRequest.
+                GetResponseAsBusinessEntity<AllcountriesResponse>(CountryGetAll);
             Result actualCountry = allcountriesResponse.RestResponse.Result.First(res => res.Name == country);
             
             Assert.AreEqual(expectedCountry.ToString(), actualCountry.ToString());

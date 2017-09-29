@@ -18,9 +18,11 @@ namespace RestAPITests.Tests
         public void GetAllCountriesTest()
         {
             Console.WriteLine("GetAllCountriesTest " + System.Threading.Thread.CurrentThread.Name);
-            var response = restClient.GetResponseStatusCode(GetAllCountryEndPoint);
+            var response = restClient.HttpGetRequest.
+                GetResponseStatusCode(GetAllCountryEndPoint);
             Assert.AreEqual(response, HttpStatusCode.OK, $"Expected {HttpStatusCode.OK}, but was {response}");
-            response = restClient.OptionsResponseStatusCode(GetAllCountryEndPoint);
+            response = restClient.HttpOptionsRequest.
+                OptionsResponseStatusCode(GetAllCountryEndPoint);
             Assert.AreEqual(response, HttpStatusCode.OK, $"Expected {HttpStatusCode.OK}, but was {response}");
         }
 
@@ -28,7 +30,7 @@ namespace RestAPITests.Tests
         public void GetCountryByIsoCode()
         {
             Console.WriteLine("GetCountryByIsoCode " + System.Threading.Thread.CurrentThread.Name);
-            AllcountriesResponse allcountriesResponse = restClient
+            AllcountriesResponse allcountriesResponse = restClient.HttpGetRequest
                 .GetResponseAsBusinessEntity<AllcountriesResponse>(GetIso2codeEndPoint + "/IN");            
             Assert.AreEqual("India", allcountriesResponse.RestResponse.Result.First().Name);
         }
@@ -37,7 +39,7 @@ namespace RestAPITests.Tests
         public void NoMatchingCountry()
         {
             Console.WriteLine("NoMatchingCountry " + System.Threading.Thread.CurrentThread.Name);
-            StateResponse stateResponse = restClient
+            StateResponse stateResponse = restClient.HttpGetRequest
                 .GetResponseAsBusinessEntity<StateResponse>(GetIso2codeEndPoint + "/IU");
             
             Assert.That(stateResponse.CountryResponse.Messages.First(), Does.Contain("More webservices"));                

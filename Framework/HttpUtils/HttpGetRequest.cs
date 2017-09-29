@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Framework.HttpUtils
 {
-    class HttpGetRequest
+    public class HttpGetRequest
     {
         private HttpClient Client;
 
@@ -25,6 +21,12 @@ namespace Framework.HttpUtils
         public HttpStatusCode GetResponseStatusCode(string requestUri)
         {
             return Client.GetAsync(requestUri).Result.StatusCode;
+        }
+
+        public T GetResponseAsBusinessEntity<T>(string requestUri) where T : new()
+        {
+            var result = Client.GetAsync(requestUri).Result.Content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<T>(result);
         }
     }
 }
