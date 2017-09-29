@@ -14,7 +14,7 @@ namespace RestAPITests.Tests
     [TestFixture]
     public class CountriesTest : FunctionalTest
     {        
-        private string BasePath => "/country";
+        private string CountryGetAll => "/country/get/all";
 
         public static IEnumerable DifferentCountries
         {
@@ -34,10 +34,8 @@ namespace RestAPITests.Tests
             {
                 Name = country, Alpha2_code = alphacode2, Alpha3_code = alphacode3
             };
-
-            string response = client.GetAsync("/country/get/all").Result.Content.ReadAsStringAsync().Result;
-
-            AllcountriesResponse allcountriesResponse = JsonConvert.DeserializeObject<AllcountriesResponse>(response);
+            
+            AllcountriesResponse allcountriesResponse = restClient.GetResponseAsBusinessEntity<AllcountriesResponse>(CountryGetAll);
             Result actualCountry = allcountriesResponse.RestResponse.Result.First(res => res.Name == country);
             
             Assert.AreEqual(expectedCountry.ToString(), actualCountry.ToString());

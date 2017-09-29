@@ -11,14 +11,7 @@ namespace RestAPITests.Models.AllCountries
         [JsonProperty("alpha3_code")]
         public string Alpha3_code { get; set; }
 
-        public Result() { }
-
-        public Result(string name, string alpha2_code, string alpha3_code)
-        {
-            this.Name = name;
-            this.Alpha2_code = alpha2_code;
-            this.Alpha3_code = alpha3_code;
-        }
+        public Result() { }        
 
         public override string ToString()
         {

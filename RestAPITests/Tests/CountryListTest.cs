@@ -13,14 +13,13 @@ namespace RestAPITests.Tests
     [TestFixture]
     public class CountryListTest : FunctionalTest
     {        
-        private string BasePath => "/country";        
+        private string CountryGetAll => "/country/get/all";
 
         [Test]
         public void ListContainsUkraine()
         {
             Console.WriteLine("ListContainsUkraine " + System.Threading.Thread.CurrentThread.Name);
-            var response = client.GetAsync(BasePath + "/get/all").Result.Content.ReadAsStringAsync().Result;
-            AllcountriesResponse allcountriesResponse = JsonConvert.DeserializeObject<AllcountriesResponse>(response);
+            AllcountriesResponse allcountriesResponse = restClient.GetResponseAsBusinessEntity<AllcountriesResponse>(CountryGetAll);                
             Assert.AreEqual("UA", allcountriesResponse.RestResponse.Result.First(country => country.Name == "Ukraine").Alpha2_code);
         }
 
@@ -28,9 +27,8 @@ namespace RestAPITests.Tests
         public void ListContainsAlgeriaResult()
         {
             Console.WriteLine("ListContainsAlgeriaResult " + System.Threading.Thread.CurrentThread.Name);
-            Result expectedAlgeria = new Result("Algeria", "DZ", "DZA");
-            var response = client.GetAsync(BasePath + "/get/all").Result.Content.ReadAsStringAsync().Result;
-            AllcountriesResponse allcountriesResponse = JsonConvert.DeserializeObject<AllcountriesResponse>(response);
+            Result expectedAlgeria = new Result() {Name = "Algeria", Alpha2_code = "DZ", Alpha3_code = "DZA"};
+            AllcountriesResponse allcountriesResponse = restClient.GetResponseAsBusinessEntity<AllcountriesResponse>(CountryGetAll);
             Result actualAlgeria = allcountriesResponse.RestResponse.Result.First(country => country.Name == "Algeria");
             Assert.AreEqual(expectedAlgeria.ToString(), actualAlgeria.ToString());
         }

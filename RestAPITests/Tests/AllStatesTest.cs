@@ -5,6 +5,7 @@ using NUnit.Framework;
 using System.Net.Http;
 using System.Net;
 using RestAPITests.Models.Country;
+using Framework.HttpUtils;
 
 namespace RestAPITests.Tests
 {
@@ -16,16 +17,14 @@ namespace RestAPITests.Tests
         public void GetStatusCodeTestCase()
         {
             Console.WriteLine("GetStatusCodeTestCase " + System.Threading.Thread.CurrentThread.Name);
-            var actualStatusCode = client.GetAsync(BasePath + "/get/IND/UP").Result.StatusCode;
-            Assert.AreEqual(HttpStatusCode.OK, actualStatusCode);            
+            Assert.AreEqual(HttpStatusCode.OK, restClient.GetResponseStatusCode(BasePath + "/get/IND/UP"));            
         }
 
         [Test]
         public void GetCapitalWorks()
         {
             Console.WriteLine("GetCapitalWorks " + System.Threading.Thread.CurrentThread.Name);
-            var actualCountryInfo = client.GetAsync(BasePath + "/get/IND/UP").Result.Content.ReadAsStringAsync().Result;
-            StateResponse sp = JsonConvert.DeserializeObject<StateResponse>(actualCountryInfo);
+            StateResponse sp = restClient.GetResponseAsBusinessEntity<StateResponse>(BasePath + "/get/IND/UP");
             Assert.That(sp.CountryResponse.CountryInfo.First().Capital, Is.EqualTo("Lucknow"));
         }
 
@@ -33,8 +32,7 @@ namespace RestAPITests.Tests
         public void GetJsonBody()
         {
             Console.WriteLine("GetJsonBody " + System.Threading.Thread.CurrentThread.Name);
-            string response = client.GetAsync(BasePath + "/get/IND/UP").Result.Content.ReadAsStringAsync().Result;
-            StateResponse stateResponse = JsonConvert.DeserializeObject<StateResponse>(response);
+            StateResponse stateResponse = restClient.GetResponseAsBusinessEntity<StateResponse>(BasePath + "/get/IND/UP");
             Assert.AreEqual("Lucknow", stateResponse.CountryResponse.CountryInfo.First().Capital);
         }
 
@@ -42,14 +40,13 @@ namespace RestAPITests.Tests
         public void GetJsonBodyAndOtherHost()
         {
             Console.WriteLine("GetJsonBodyAndOtherHost " + System.Threading.Thread.CurrentThread.Name);
-            string response = client.GetAsync(BasePath + "/get/IND/UP").Result.Content.ReadAsStringAsync().Result;
-            StateResponse stateResponse = JsonConvert.DeserializeObject<StateResponse>(response);
+            StateResponse stateResponse = restClient.GetResponseAsBusinessEntity<StateResponse>(BasePath + "/get/IND/UP");
             Assert.AreEqual("Lucknow", stateResponse.CountryResponse.CountryInfo.First().Capital);
-
-            HttpClient rest = new HttpClient();
-            rest.BaseAddress = new Uri("http://api.openweathermap.org");
-            var actualStatus = rest.GetAsync("/data/2.5/weather?lat=35&lon=139").Result.StatusCode;
-            Assert.AreEqual(HttpStatusCode.Unauthorized, actualStatus);
+            
+            RestClient rest = new RestClient("http://api.openweathermap.org");
+            Assert.AreEqual(HttpStatusCode.Unauthorized,
+                new RestClient("http://api.openweathermap.org")
+                .GetResponseStatusCode("/data/2.5/weather?lat=35&lon=139"));
         }
 }
 }

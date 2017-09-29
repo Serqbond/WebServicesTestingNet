@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json;
-using RestAPITests.Models.Country;
+﻿using RestAPITests.Models.Country;
 using System;
 using System.Linq;
-using System.Net.Http;
 using NUnit.Framework;
 
 namespace RestAPITests.Tests
@@ -11,6 +9,10 @@ namespace RestAPITests.Tests
     public class SearchTests : FunctionalTest
     {        
         private string BasePath => "/state";
+        private string SearchState(string country, string state)
+        {            
+            return $"/state/search/{country}?text={state}";
+        }
 
         [Test]
         public void SearchByTextInUsa()
@@ -25,11 +27,9 @@ namespace RestAPITests.Tests
                 LargestCity = "Seattle",
                 Name = "Washington"
             };
-
-            string response = client.GetAsync(BasePath + "/search/USA?text=wash").Result.Content.ReadAsStringAsync().Result;
-
-            StateResponse countryServerResponse = JsonConvert.DeserializeObject<StateResponse>(response);
-
+            
+            StateResponse countryServerResponse = restClient.GetResponseAsBusinessEntity<StateResponse>(SearchState("USA", "wash"));
+            
             CountryInfo actualIndia = countryServerResponse.CountryResponse
                 .CountryInfo
                 .First(country => country.Abbr == expectedCountryInfo.Abbr);
@@ -55,10 +55,8 @@ namespace RestAPITests.Tests
                 LargestCity = "Visakhapatnam",
                 Name = "Andhra Pradesh"
             };
-
-            string response = client.GetAsync(BasePath + "/search/IND?text=pradesh").Result.Content.ReadAsStringAsync().Result;
-
-            StateResponse countryServerResponse = JsonConvert.DeserializeObject<StateResponse>(response);
+            
+            StateResponse countryServerResponse = restClient.GetResponseAsBusinessEntity<StateResponse>(SearchState("IND", "pradesh"));
 
             CountryInfo actualIndia = countryServerResponse.CountryResponse
                 .CountryInfo

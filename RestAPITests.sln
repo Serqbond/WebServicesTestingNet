@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestAPITests", "RestAPITests\RestAPITests.csproj", "{44BDA0E7-179B-4AD9-A06C-DE08903AF064}"
+	ProjectSection(ProjectDependencies) = postProject
+		{36204D6F-CDD9-4618-B082-D43907F7F8BD} = {36204D6F-CDD9-4618-B082-D43907F7F8BD}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{36204D6F-CDD9-4618-B082-D43907F7F8BD}"
 EndProject

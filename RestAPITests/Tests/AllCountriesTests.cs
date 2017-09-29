@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using RestAPITests.Models.AllCountries;
-using Newtonsoft.Json;
 using NUnit.Framework;
 using RestAPITests.Models.Country;
 
@@ -12,25 +10,26 @@ namespace RestAPITests.Tests
     [TestFixture]    
     public class AllCountriesTests : FunctionalTest
     {        
-        private string BasePath => "/country";        
+        private string BasePath => "/country";
+        private string GetAllCountryEndPoint => "/country/get/all";
+        private string GetIso2codeEndPoint => "/country/get/iso2code";
 
         [Test]
         public void GetAllCountriesTest()
         {
             Console.WriteLine("GetAllCountriesTest " + System.Threading.Thread.CurrentThread.Name);
-            var response = client.GetAsync(BasePath + "/get/all").Result;
-            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK, $"Expected {HttpStatusCode.OK}, but was {response.StatusCode}");
-            response = client.SendAsync(new HttpRequestMessage(HttpMethod.Options, BasePath + "/get/all")).Result;
-            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK, $"Expected {HttpStatusCode.OK}, but was {response.StatusCode}");
+            var response = restClient.GetResponseStatusCode(GetAllCountryEndPoint);
+            Assert.AreEqual(response, HttpStatusCode.OK, $"Expected {HttpStatusCode.OK}, but was {response}");
+            response = restClient.OptionsResponseStatusCode(GetAllCountryEndPoint);
+            Assert.AreEqual(response, HttpStatusCode.OK, $"Expected {HttpStatusCode.OK}, but was {response}");
         }
 
         [Test]
         public void GetCountryByIsoCode()
         {
             Console.WriteLine("GetCountryByIsoCode " + System.Threading.Thread.CurrentThread.Name);
-            var response = client.GetAsync(BasePath + "/get/iso2code/IN").Result.Content.ReadAsStringAsync().Result;            
-            AllcountriesResponse allcountriesResponse = JsonConvert.DeserializeObject<AllcountriesResponse>(response);
-
+            AllcountriesResponse allcountriesResponse = restClient
+                .GetResponseAsBusinessEntity<AllcountriesResponse>(GetIso2codeEndPoint + "/IN");            
             Assert.AreEqual("India", allcountriesResponse.RestResponse.Result.First().Name);
         }
 
@@ -38,11 +37,12 @@ namespace RestAPITests.Tests
         public void NoMatchingCountry()
         {
             Console.WriteLine("NoMatchingCountry " + System.Threading.Thread.CurrentThread.Name);
-            var response = client.GetAsync(BasePath + "/get/iso2code/IU").Result.Content.ReadAsStringAsync().Result;
-            StateResponse stateResponse = JsonConvert.DeserializeObject<StateResponse>(response);
-            Assert.That(stateResponse.CountryResponse.Messages.First(), Does.Contain("More webservices"));
-                
-            Assert.AreEqual("No matching country found for requested code [IU].", stateResponse.CountryResponse.Messages.Last());
+            StateResponse stateResponse = restClient
+                .GetResponseAsBusinessEntity<StateResponse>(GetIso2codeEndPoint + "/IU");
+            
+            Assert.That(stateResponse.CountryResponse.Messages.First(), Does.Contain("More webservices"));                
+            Assert.AreEqual("No matching country found for requested code [IU].", 
+                stateResponse.CountryResponse.Messages.Last());
         }        
     }
 }

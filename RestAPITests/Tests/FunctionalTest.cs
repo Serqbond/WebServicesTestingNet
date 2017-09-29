@@ -1,28 +1,26 @@
 ﻿using System;
 using NUnit.Framework;
 using System.Net.Http;
+using Framework.HttpUtils;
 
 namespace RestAPITests.Tests
 {
     public class FunctionalTest
     {
         protected HttpClient client;
+        protected RestClient restClient;
 
         [SetUp]
         public void Setup()
-        {
-            client = new HttpClient();       
-            string baseHost = Environment.GetEnvironmentVariable("server.host");          
-            Console.WriteLine("Printed if env var exists " + baseHost);
+        {                
+            string baseHost = Environment.GetEnvironmentVariable("server.host");            
 
             if (baseHost == null)
             {
                 baseHost = "http://services.groupkt.com";
-                Console.WriteLine("Printed if env var does not exist " + baseHost);
             }
 
-            Uri BaseAddress = new Uri(baseHost);
-            client.BaseAddress = BaseAddress;
+            restClient = new RestClient(baseHost);
         }
     }
 }
