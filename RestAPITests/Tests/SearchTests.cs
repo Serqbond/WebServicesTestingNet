@@ -8,7 +8,6 @@ namespace RestAPITests.Tests
     [TestFixture]
     public class SearchTests : FunctionalTest
     {        
-        private string BasePath => "/state";
         private string SearchState(string country, string state)
         {            
             return $"/state/search/{country}?text={state}";
@@ -30,15 +29,11 @@ namespace RestAPITests.Tests
             
             StateResponse countryServerResponse = restClient.GetResponseAsBusinessEntity<StateResponse>(SearchState("USA", "wash"));
             
-            CountryInfo actualIndia = countryServerResponse.CountryResponse
+            CountryInfo actual = countryServerResponse.CountryResponse
                 .CountryInfo
                 .First(country => country.Abbr == expectedCountryInfo.Abbr);
-            Assert.AreEqual(expectedCountryInfo.Abbr, actualIndia.Abbr);
-            Assert.AreEqual(expectedCountryInfo.Capital, actualIndia.Capital);
-            Assert.AreEqual(expectedCountryInfo.Area, actualIndia.Area);
-            Assert.AreEqual(expectedCountryInfo.Country, actualIndia.Country);
-            Assert.AreEqual(expectedCountryInfo.LargestCity, actualIndia.LargestCity);
-            Assert.AreEqual(expectedCountryInfo.Name, actualIndia.Name);
+
+            AssertCountryInfoAreEqual(expectedCountryInfo, actual);
         }
 
         [Test]
@@ -61,12 +56,17 @@ namespace RestAPITests.Tests
             CountryInfo actualIndia = countryServerResponse.CountryResponse
                 .CountryInfo
                 .First(country => country.Abbr == expectedCountryInfo.Abbr);
-            Assert.AreEqual(expectedCountryInfo.Abbr, actualIndia.Abbr);
-            Assert.AreEqual(expectedCountryInfo.Capital, actualIndia.Capital);
-            Assert.AreEqual(expectedCountryInfo.Area, actualIndia.Area);
-            Assert.AreEqual(expectedCountryInfo.Country, actualIndia.Country);
-            Assert.AreEqual(expectedCountryInfo.LargestCity, actualIndia.LargestCity);
-            Assert.AreEqual(expectedCountryInfo.Name, actualIndia.Name);
+            AssertCountryInfoAreEqual(expectedCountryInfo, actualIndia);
+        }
+
+        private void AssertCountryInfoAreEqual(CountryInfo expected, CountryInfo actual)
+        {
+            Assert.AreEqual(expected.Abbr, actual.Abbr);
+            Assert.AreEqual(expected.Capital, actual.Capital);
+            Assert.AreEqual(expected.Area, actual.Area);
+            Assert.AreEqual(expected.Country, actual.Country);
+            Assert.AreEqual(expected.LargestCity, actual.LargestCity);
+            Assert.AreEqual(expected.Name, actual.Name);
         }
     }
 }
