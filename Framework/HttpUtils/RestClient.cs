@@ -9,6 +9,7 @@ namespace Framework.HttpUtils
         public HttpGetRequest HttpGetRequest { get; private set; }
         public HttpOptionsRequest HttpOptionsRequest { get; private set; }
         public HttpPostRequest HttpPostRequest { get; private set; }
+        public HttpDeleteRequest HttpDeleteRequest { get; private set; }
 
         public RestClient()
         {                 
@@ -31,6 +32,7 @@ namespace Framework.HttpUtils
             HttpGetRequest = new HttpGetRequest(Client);
             HttpOptionsRequest = new HttpOptionsRequest(Client);
             HttpPostRequest = new HttpPostRequest(Client);
+            HttpDeleteRequest = new HttpDeleteRequest(Client);
         }
     }
 }

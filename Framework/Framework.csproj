@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpUtils\HttpDeleteRequest.cs" />
     <Compile Include="HttpUtils\HttpGetRequest.cs" />
     <Compile Include="HttpUtils\HttpOptionsRequest.cs" />
     <Compile Include="HttpUtils\HttpPostRequest.cs" />

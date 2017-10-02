@@ -10,6 +10,7 @@ namespace RestAPITests.Tests.Placeholdertests
     {
         private string PostEndpoint => "/posts";
         private string HostName => "https://jsonplaceholder.typicode.com";
+        private string DeleteEndpoint => "/posts/1";
 
 
         [Test]
@@ -36,6 +37,18 @@ namespace RestAPITests.Tests.Placeholdertests
                 .PostResponseAsBusinessEntity<PostResponseId>(PostEndpoint, StringContentCreator.Create(user));
 
             Assert.AreEqual(101, actualPostResponseId.Id);
+        }
+
+        [Test]
+        public void DeleteDataStausCodeCorrectTest()
+        {
+            restClient.SetNewHost(HostName);
+
+            var actualDeleteResponseCode = restClient
+                .HttpDeleteRequest
+                .DeleteResponseStatusCode(DeleteEndpoint);
+
+            Assert.AreEqual(HttpStatusCode.OK, actualDeleteResponseCode);
         }
     }
 }
