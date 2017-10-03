@@ -41,8 +41,7 @@ namespace RestAPITests.Tests
             Console.WriteLine("NoMatchingCountry " + System.Threading.Thread.CurrentThread.Name);
             StateResponse stateResponse = restClient.HttpGetRequest
                 .GetResponseAsBusinessEntity<StateResponse>(GetIso2codeEndPoint + "/IU");
-            
-            Assert.That(stateResponse.CountryResponse.Messages.First(), Does.Contain("More webservices"));                
+                                       
             Assert.AreEqual("No matching country found for requested code [IU].", 
                 stateResponse.CountryResponse.Messages.Last());
         }        

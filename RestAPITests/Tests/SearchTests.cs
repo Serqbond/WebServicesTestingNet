@@ -45,10 +45,10 @@ namespace RestAPITests.Tests
             CountryInfo expectedCountryInfo = new CountryInfo()
             {
                 Abbr = "AP",
-                Area = "160205SKM",
-                Capital = "Hyderabad, India",
+                Area = "49506799SKM",
+                Capital = "Hyderabad Amaravati",
                 Country = "IND",
-                LargestCity = "Visakhapatnam",
+                LargestCity = "Hyderabad Amaravati",
                 Name = "Andhra Pradesh"
             };
             
@@ -64,7 +64,7 @@ namespace RestAPITests.Tests
         private void AssertCountryInfoAreEqual(CountryInfo expected, CountryInfo actual)
         {
             Assert.AreEqual(expected.Abbr, actual.Abbr);
-            Assert.AreEqual(expected.Capital, actual.Capital);
+            Assert.AreEqual(expected.Capital, actual.Capital, "Capital");
             Assert.AreEqual(expected.Area, actual.Area);
             Assert.AreEqual(expected.Country, actual.Country);
             Assert.AreEqual(expected.LargestCity, actual.LargestCity);
