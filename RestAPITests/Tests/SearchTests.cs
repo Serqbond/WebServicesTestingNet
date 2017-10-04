@@ -64,7 +64,7 @@ namespace RestAPITests.Tests
         private void AssertCountryInfoAreEqual(CountryInfo expected, CountryInfo actual)
         {
             Assert.AreEqual(expected.Abbr, actual.Abbr);
-            Assert.AreEqual(expected.Capital, actual.Capital, "Capital");
+            Assert.AreEqual(expected.Capital, actual.Capital, "Capital is wrong");
             Assert.AreEqual(expected.Area, actual.Area);
             Assert.AreEqual(expected.Country, actual.Country);
             Assert.AreEqual(expected.LargestCity, actual.LargestCity);
