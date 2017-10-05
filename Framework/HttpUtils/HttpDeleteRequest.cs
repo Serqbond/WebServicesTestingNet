@@ -10,7 +10,7 @@ namespace Framework.HttpUtils
 {
      public class HttpDeleteRequest
     {
-        private HttpClient Client;
+        private HttpClient Client { get; set; }
 
         public HttpDeleteRequest(HttpClient client)
         {

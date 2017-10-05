@@ -5,7 +5,7 @@ namespace Framework.HttpUtils
 {
     public class HttpOptionsRequest
     {
-        private HttpClient Client;
+        private HttpClient Client { get; set; }
 
         public HttpOptionsRequest(HttpClient client)
         {

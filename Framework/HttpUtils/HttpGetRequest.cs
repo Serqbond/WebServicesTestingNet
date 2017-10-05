@@ -6,7 +6,7 @@ namespace Framework.HttpUtils
 {
     public class HttpGetRequest
     {
-        private HttpClient Client;
+        private HttpClient Client { get; set; }
 
         public HttpGetRequest(HttpClient client)
         {
