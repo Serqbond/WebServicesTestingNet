@@ -26,7 +26,7 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
             }
             
             var restClient = new RestClient(baseHost);
-            objectContainer.RegisterInstanceAs<RestClient>(restClient);
+            objectContainer.RegisterInstanceAs<RestClient>(restClient);            
         }
 
         [AfterScenario]

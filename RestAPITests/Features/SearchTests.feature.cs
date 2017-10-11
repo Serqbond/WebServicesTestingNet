@@ -95,7 +95,44 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
  testRunner.When("I get response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
- testRunner.Then("the response is equl to CountryInfo object", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the response is equal to CountryInfo object", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("SearchByTextInINDBdd")]
+        [NUnit.Framework.CategoryAttribute("SearchTestsSuit")]
+        public virtual void SearchByTextInINDBdd()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("SearchByTextInINDBdd", new string[] {
+                        "SearchTestsSuit"});
+#line 13
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Abbr",
+                        "Area",
+                        "Capital",
+                        "Country",
+                        "LargestCity",
+                        "Name"});
+            table2.AddRow(new string[] {
+                        "AP",
+                        "49506799SKM",
+                        "Hyderabad Amaravati",
+                        "IND",
+                        "Hyderabad Amaravati",
+                        "Andhra Pradesh"});
+#line 14
+ testRunner.Given("I have a CountryInfo object", ((string)(null)), table2, "Given ");
+#line 17
+ testRunner.And("I call service \'/state/search/{country}?text={state}\' with parameters \'IND\' and \'" +
+                    "pradesh\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 18
+ testRunner.When("I get response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 19
+ testRunner.Then("the response is equal to CountryInfo object", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

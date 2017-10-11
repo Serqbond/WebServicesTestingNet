@@ -1,8 +1,6 @@
-﻿using BoDi;
-using Framework.HttpUtils;
+﻿using Framework.HttpUtils;
 using NUnit.Framework;
 using RestAPITests.Models.Country;
-using System;
 using System.Linq;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -20,20 +18,7 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
         public SearchTestsSteps(RestClient restClient)
         {
             this.restClient = restClient;
-        }
-
-        //[BeforeScenario(Order = 0)]
-        //public void SetHttpClient()
-        //{            
-        //    string baseHost = Environment.GetEnvironmentVariable("server.host");
-
-        //    if (baseHost == null)
-        //    {
-        //        baseHost = "http://services.groupkt.com";
-        //    }
-
-        //    restClient = new RestClient(baseHost);
-        //}        
+        }   
 
         [Given(@"I have a CountryInfo object")]
         public void GivenIHaveACountryInfoObject(Table table)
@@ -59,7 +44,7 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
                 .First(country => country.Abbr == expectedCountryInfo.Abbr);
         }
 
-        [Then(@"the response is equl to CountryInfo object")]
+        [Then(@"the response is equal to CountryInfo object")]
         public void ThenTheResponseIsEqulToCountryInfoObject()
         {
             Assert.AreEqual(expectedCountryInfo.Abbr, actual.Abbr);
