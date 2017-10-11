@@ -14,7 +14,7 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
     public class SearchTestsSteps
     {
         [BeforeScenario(Order = 0)]
-        public void CleanDatabase()
+        public void SetHttpClient()
         {            
             string baseHost = Environment.GetEnvironmentVariable("server.host");
 
