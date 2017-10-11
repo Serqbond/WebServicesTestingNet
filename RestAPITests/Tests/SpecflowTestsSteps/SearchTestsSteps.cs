@@ -1,9 +1,11 @@
-﻿using Framework.HttpUtils;
+﻿using BoDi;
+using Framework.HttpUtils;
 using NUnit.Framework;
 using RestAPITests.Models.Country;
 using System;
 using System.Linq;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 
 namespace RestAPITests.Tests.SpecflowTestsSteps
 {
@@ -15,31 +17,28 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
         private StateResponse countryServerResponse;
         private CountryInfo actual;
 
-        [BeforeScenario(Order = 0)]
-        public void SetHttpClient()
-        {            
-            string baseHost = Environment.GetEnvironmentVariable("server.host");
-
-            if (baseHost == null)
-            {
-                baseHost = "http://services.groupkt.com";
-            }
-
-            restClient = new RestClient(baseHost);
+        public SearchTestsSteps(RestClient restClient)
+        {
+            this.restClient = restClient;
         }
 
+        //[BeforeScenario(Order = 0)]
+        //public void SetHttpClient()
+        //{            
+        //    string baseHost = Environment.GetEnvironmentVariable("server.host");
+
+        //    if (baseHost == null)
+        //    {
+        //        baseHost = "http://services.groupkt.com";
+        //    }
+
+        //    restClient = new RestClient(baseHost);
+        //}        
+
         [Given(@"I have a CountryInfo object")]
-        public void GivenIHaveACountryInfoObject()
+        public void GivenIHaveACountryInfoObject(Table table)
         {
-            expectedCountryInfo = new CountryInfo()
-            {
-                Abbr = "WA",
-                Area = "184661SKM",
-                Capital = "Olympia",
-                Country = "USA",
-                LargestCity = "Seattle",
-                Name = "Washington"
-            };            
+            expectedCountryInfo = table.CreateInstance<CountryInfo>();            
         }
 
         [Given(@"I call service '(.*)' with parameters '(.*)' and '(.*)'")]
@@ -58,8 +57,6 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
             actual = countryServerResponse.CountryResponse
                 .CountryInfo
                 .First(country => country.Abbr == expectedCountryInfo.Abbr);
-
-            ScenarioContext.Current.Add("actualCountryInfo", actual);
         }
 
         [Then(@"the response is equl to CountryInfo object")]

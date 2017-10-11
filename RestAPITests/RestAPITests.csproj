@@ -94,6 +94,7 @@
     <Compile Include="Tests\FunctionalTest.cs" />
     <Compile Include="Tests\Placeholdertests\JsonPlaceholderTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
+    <Compile Include="Tests\SpecflowTestsSteps\SearchTestsHook.cs" />
     <Compile Include="Tests\SpecflowTestsSteps\SearchTestsSteps.cs" />
   </ItemGroup>
   <ItemGroup>
