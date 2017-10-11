@@ -2,10 +2,7 @@
 using NUnit.Framework;
 using RestAPITests.Models.Country;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace RestAPITests.Tests.SpecflowTestsSteps
@@ -13,6 +10,11 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
     [Binding]
     public class SearchTestsSteps
     {
+        private RestClient restClient;
+        private CountryInfo expectedCountryInfo;
+        private StateResponse countryServerResponse;
+        private CountryInfo actual;
+
         [BeforeScenario(Order = 0)]
         public void SetHttpClient()
         {            
@@ -23,14 +25,13 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
                 baseHost = "http://services.groupkt.com";
             }
 
-            var restClient = new RestClient(baseHost);
-            ScenarioContext.Current.Add("HttpClient", restClient);
+            restClient = new RestClient(baseHost);
         }
 
         [Given(@"I have a CountryInfo object")]
         public void GivenIHaveACountryInfoObject()
         {
-            CountryInfo expectedCountryInfo = new CountryInfo()
+            expectedCountryInfo = new CountryInfo()
             {
                 Abbr = "WA",
                 Area = "184661SKM",
@@ -38,9 +39,7 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
                 Country = "USA",
                 LargestCity = "Seattle",
                 Name = "Washington"
-            };
-
-            ScenarioContext.Current.Add("expectedCountryInfo", expectedCountryInfo);
+            };            
         }
 
         [Given(@"I call service '(.*)' with parameters '(.*)' and '(.*)'")]
@@ -48,21 +47,17 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
         {
             string actualPath = path.Replace("{country}", country).Replace("{state}", state);
 
-            StateResponse countryServerResponse = ((RestClient)ScenarioContext.Current["HttpClient"])
+            countryServerResponse = restClient
                 .HttpGetRequest.
-                GetResponseAsBusinessEntity<StateResponse>(actualPath);
-
-            ScenarioContext.Current.Add("countryServerResponse", countryServerResponse);
+                GetResponseAsBusinessEntity<StateResponse>(actualPath);            
         }
 
         [When(@"I get response")]
         public void WhenIGetResponse()
-        {
-            var countryServerResponse = ((StateResponse)ScenarioContext.Current["countryServerResponse"]);
-            
-            CountryInfo actual = countryServerResponse.CountryResponse
+        {            
+            actual = countryServerResponse.CountryResponse
                 .CountryInfo
-                .First(country => country.Abbr == ((CountryInfo)ScenarioContext.Current["expectedCountryInfo"]).Abbr);
+                .First(country => country.Abbr == expectedCountryInfo.Abbr);
 
             ScenarioContext.Current.Add("actualCountryInfo", actual);
         }
@@ -70,16 +65,12 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
         [Then(@"the response is equl to CountryInfo object")]
         public void ThenTheResponseIsEqulToCountryInfoObject()
         {
-            var expected = (CountryInfo)ScenarioContext.Current["expectedCountryInfo"];
-            var actual = (CountryInfo)ScenarioContext.Current["actualCountryInfo"];
-
-            Assert.AreEqual(expected.Abbr, actual.Abbr);
-            Assert.AreEqual(expected.Capital, actual.Capital, "Capital is wrong");
-            Assert.AreEqual(expected.Area, actual.Area);
-            Assert.AreEqual(expected.Country, actual.Country);
-            Assert.AreEqual(expected.LargestCity, actual.LargestCity);
-            Assert.AreEqual(expected.Name, actual.Name);
+            Assert.AreEqual(expectedCountryInfo.Abbr, actual.Abbr);
+            Assert.AreEqual(expectedCountryInfo.Capital, actual.Capital, "Capital is wrong");
+            Assert.AreEqual(expectedCountryInfo.Area, actual.Area);
+            Assert.AreEqual(expectedCountryInfo.Country, actual.Country);
+            Assert.AreEqual(expectedCountryInfo.LargestCity, actual.LargestCity);
+            Assert.AreEqual(expectedCountryInfo.Name, actual.Name);
         }
-
     }
 }
