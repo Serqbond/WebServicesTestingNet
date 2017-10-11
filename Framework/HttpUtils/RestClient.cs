@@ -5,7 +5,7 @@ namespace Framework.HttpUtils
 {
     public class RestClient
     {
-        private HttpClient Client { get; set; }
+        public HttpClient Client { get; private set; }
         public HttpGetRequest HttpGetRequest { get; private set; }
         public HttpOptionsRequest HttpOptionsRequest { get; private set; }
         public HttpPostRequest HttpPostRequest { get; private set; }
