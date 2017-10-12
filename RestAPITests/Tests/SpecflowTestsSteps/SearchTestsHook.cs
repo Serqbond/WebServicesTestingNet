@@ -5,7 +5,7 @@ using TechTalk.SpecFlow;
 
 namespace RestAPITests.Tests.SpecflowTestsSteps
 {
-    [Binding]
+    [Binding, Scope(Tag = "Client")]
     public sealed class SearchTestsHook
     {       
         private readonly IObjectContainer objectContainer;

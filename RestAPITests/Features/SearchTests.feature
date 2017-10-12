@@ -1,6 +1,7 @@
 ﻿Feature: SearchTests
 
 @SearchTestsSuit
+@Client
 Scenario: SearchByTextInUsaBdd
 	Given I have a CountryInfo object
 	    | Abbr | Area | Capital | Country | LargestCity | Name |
@@ -10,6 +11,7 @@ Scenario: SearchByTextInUsaBdd
 	Then the response is equal to CountryInfo object
 
 @SearchTestsSuit
+@Client
 Scenario: SearchByTextInINDBdd
 	Given I have a CountryInfo object
 	    | Abbr | Area | Capital | Country | LargestCity | Name |

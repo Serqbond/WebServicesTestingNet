@@ -66,11 +66,13 @@ namespace RestAPITests.Features
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("SearchByTextInUsaBdd")]
         [NUnit.Framework.CategoryAttribute("SearchTestsSuit")]
+        [NUnit.Framework.CategoryAttribute("Client")]
         public virtual void SearchByTextInUsaBdd()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("SearchByTextInUsaBdd", new string[] {
-                        "SearchTestsSuit"});
-#line 4
+                        "SearchTestsSuit",
+                        "Client"});
+#line 5
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -87,14 +89,14 @@ this.ScenarioSetup(scenarioInfo);
                         "USA",
                         "Seattle",
                         "Washington"});
-#line 5
+#line 6
  testRunner.Given("I have a CountryInfo object", ((string)(null)), table1, "Given ");
-#line 8
+#line 9
  testRunner.And("I call service \'/state/search/{country}?text={state}\' with parameters \'USA\' and \'" +
                     "wash\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 9
- testRunner.When("I get response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
+ testRunner.When("I get response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 11
  testRunner.Then("the response is equal to CountryInfo object", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -103,11 +105,13 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("SearchByTextInINDBdd")]
         [NUnit.Framework.CategoryAttribute("SearchTestsSuit")]
+        [NUnit.Framework.CategoryAttribute("Client")]
         public virtual void SearchByTextInINDBdd()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("SearchByTextInINDBdd", new string[] {
-                        "SearchTestsSuit"});
-#line 13
+                        "SearchTestsSuit",
+                        "Client"});
+#line 15
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -124,14 +128,14 @@ this.ScenarioSetup(scenarioInfo);
                         "IND",
                         "Hyderabad Amaravati",
                         "Andhra Pradesh"});
-#line 14
+#line 16
  testRunner.Given("I have a CountryInfo object", ((string)(null)), table2, "Given ");
-#line 17
+#line 19
  testRunner.And("I call service \'/state/search/{country}?text={state}\' with parameters \'IND\' and \'" +
                     "pradesh\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 18
+#line 20
  testRunner.When("I get response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 19
+#line 21
  testRunner.Then("the response is equal to CountryInfo object", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
