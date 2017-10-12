@@ -1,11 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RestAPITests.Tests.SpecflowTestsSteps.POM;
 using TechTalk.SpecFlow;
 
 namespace RestAPITests.Tests.SpecflowTestsSteps
@@ -14,10 +9,14 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
     public class SeleniumSteps
     {
         private IWebDriver driver;
+        GogleSearchPage gogleSearchPage;
+        BingSearchPage bingSearchPage;
 
         public SeleniumSteps(IWebDriver driver)
         {
             this.driver = driver;
+            gogleSearchPage = new GogleSearchPage(driver);
+            bingSearchPage = new BingSearchPage(driver);
         }
 
         [Given(@"I open page '(.*)'")]
@@ -26,24 +25,41 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
             driver.Navigate().GoToUrl(ulr);
         }
 
+        [Given(@"I have entered '(.*)' into the bing search field")]
+        public void GivenIHaveEnteredIntoTheBingSearchField(string searchText)
+        {
+            bingSearchPage.SerchTextField.SendKeys(searchText);
+        }
+
         [Given(@"I have entered '(.*)' into the search field")]
         public void GivenIHaveEnteredIntoTheSearchField(string searchText)
-        {
-            var element = driver.FindElement(By.Id("lst-ib"));
-            element.SendKeys(searchText);
+        {            
+            gogleSearchPage.SerchTextField.SendKeys(searchText);
         }
 
         [When(@"I press search button")]
         public void WhenIPressSearchButton()
-        {            
-            var element = driver.FindElement(By.Id("lst-ib"));
-            element.SendKeys("\n");
+        {
+            gogleSearchPage.SerchTextField.SendKeys("\n");
         }
+
+        [When(@"I press search button on the bing page")]
+        public void WhenIPressSearchButtonOnTheBingPage()
+        {
+            bingSearchPage.ButtonSearch.Click();
+        }
+
+        [Then(@"the result should contain '(.*)' on the bing page")]
+        public void ThenTheResultShouldContainOnTheBingPage(string expectedtext)
+        {
+            Assert.DoesNotThrow(() => bingSearchPage.SearchResultLink(expectedtext));
+        }
+
 
         [Then(@"the result should contain '(.*)'")]
         public void ThenTheResultShouldContain(string expectedtext)
         {
-            Assert.DoesNotThrow(() => driver.FindElement(By.XPath($"//a[contains(., '{expectedtext}')]")));
+            Assert.DoesNotThrow(() => gogleSearchPage.SearchResultLink(expectedtext));
         }
     }
 }

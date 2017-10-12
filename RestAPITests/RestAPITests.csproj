@@ -80,7 +80,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\SearchTests.feature.cs">
+    <Compile Include="Features\UiTests\BingSearchUi.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BingSearchUi.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ApiTests\SearchTests.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchTests.feature</DependentUpon>
@@ -94,10 +99,10 @@
     <Compile Include="Models\PlaceHolder\PostResponseId.cs" />
     <Compile Include="Models\PlaceHolder\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Features\SeleniumTests.feature.cs">
+    <Compile Include="Features\UiTests\GoogleSearchUi.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SeleniumTests.feature</DependentUpon>
+      <DependentUpon>GoogleSearchUi.feature</DependentUpon>
     </Compile>
     <Compile Include="Tests\AllCountriesTests.cs" />
     <Compile Include="Tests\AllStatesTest.cs" />
@@ -106,6 +111,8 @@
     <Compile Include="Tests\FunctionalTest.cs" />
     <Compile Include="Tests\Placeholdertests\JsonPlaceholderTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
+    <Compile Include="Tests\SpecflowTestsSteps\POM\BingSearchPage.cs" />
+    <Compile Include="Tests\SpecflowTestsSteps\POM\GogleSearchPage.cs" />
     <Compile Include="Tests\SpecflowTestsSteps\SearchTestsHook.cs" />
     <Compile Include="Tests\SpecflowTestsSteps\SearchTestsSteps.cs" />
     <Compile Include="Tests\SpecflowTestsSteps\SeleniumSteps.cs" />
@@ -113,14 +120,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\SearchTests.feature">
+    <None Include="Features\UiTests\BingSearchUi.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>BingSearchUi.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ApiTests\SearchTests.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SearchTests.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="Features\SeleniumTests.feature">
+    <None Include="Features\UiTests\GoogleSearchUi.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SeleniumTests.feature.cs</LastGenOutput>
+      <LastGenOutput>GoogleSearchUi.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
