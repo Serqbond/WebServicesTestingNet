@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using RestAPITests.Tests.SpecflowTestsSteps.POM;
 using System;
 using TechTalk.SpecFlow;
@@ -30,6 +31,8 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
         [Given(@"I have entered '(.*)' into the bing search field")]
         public void GivenIHaveEnteredIntoTheBingSearchField(string searchText)
         {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+            wait.Until(ExpectedConditions.ElementToBeClickable(bingSearchPage.SerchTextField));
             bingSearchPage.SerchTextField.SendKeys(searchText);
             Console.WriteLine("GivenIHaveEnteredIntoTheBingSearchField" + System.Threading.Thread.CurrentThread.Name);
         }
