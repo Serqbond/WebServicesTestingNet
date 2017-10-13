@@ -80,6 +80,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\MixedTests\MixedSearchTest.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MixedSearchTest.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\UiTests\BingSearchUi.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -111,15 +116,20 @@
     <Compile Include="Tests\FunctionalTest.cs" />
     <Compile Include="Tests\Placeholdertests\JsonPlaceholderTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
+    <Compile Include="Tests\SpecflowTestsSteps\MixedSearchTestSteps.cs" />
     <Compile Include="Tests\SpecflowTestsSteps\POM\BingSearchPage.cs" />
     <Compile Include="Tests\SpecflowTestsSteps\POM\GogleSearchPage.cs" />
-    <Compile Include="Tests\SpecflowTestsSteps\SearchTestsHook.cs" />
-    <Compile Include="Tests\SpecflowTestsSteps\SearchTestsSteps.cs" />
-    <Compile Include="Tests\SpecflowTestsSteps\SeleniumSteps.cs" />
-    <Compile Include="Tests\SpecflowTestsSteps\SeleniumTestsHooks.cs" />
+    <Compile Include="Tests\SpecflowTestsSteps\Hooks\SearchTestsHook.cs" />
+    <Compile Include="Tests\SpecflowTestsSteps\ApiSearchTestsSteps.cs" />
+    <Compile Include="Tests\SpecflowTestsSteps\SeleniumSearchTestSteps.cs" />
+    <Compile Include="Tests\SpecflowTestsSteps\Hooks\SeleniumTestsHooks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Features\MixedTests\MixedSearchTest.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MixedSearchTest.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\UiTests\BingSearchUi.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>BingSearchUi.feature.cs</LastGenOutput>

@@ -8,14 +8,14 @@ using TechTalk.SpecFlow.Assist;
 namespace RestAPITests.Tests.SpecflowTestsSteps
 {
     [Binding]
-    public class SearchTestsSteps
+    public class ApiSearchTestsSteps
     {
         private RestClient restClient;
         private CountryInfo expectedCountryInfo;
         private StateResponse countryServerResponse;
         private CountryInfo actual;
 
-        public SearchTestsSteps(RestClient restClient)
+        public ApiSearchTestsSteps(RestClient restClient)
         {
             this.restClient = restClient;
         }   

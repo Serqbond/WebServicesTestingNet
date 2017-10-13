@@ -8,13 +8,13 @@ using TechTalk.SpecFlow;
 namespace RestAPITests.Tests.SpecflowTestsSteps
 {    
     [Binding]
-    public class SeleniumSteps
+    public class SeleniumSearchTestSteps
     {
         private IWebDriver driver;
         GogleSearchPage gogleSearchPage;
         BingSearchPage bingSearchPage;
 
-        public SeleniumSteps(IWebDriver driver)
+        public SeleniumSearchTestSteps(IWebDriver driver)
         {
             this.driver = driver;
             gogleSearchPage = new GogleSearchPage(driver);
@@ -41,7 +41,7 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
             gogleSearchPage.SerchTextField.SendKeys(searchText);
         }
 
-        [When(@"I press search button")]
+        [When(@"I press search button on google page")]
         public void WhenIPressSearchButton()
         {
             gogleSearchPage.SerchTextField.SendKeys("\n");

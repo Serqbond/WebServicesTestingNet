@@ -84,7 +84,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 6
  testRunner.And(string.Format("I have entered \'{0}\' into the search field", searchedText), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 7
- testRunner.When("I press search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I press search button on google page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 8
  testRunner.Then(string.Format("the result should contain \'{0}\'", expectedText), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
