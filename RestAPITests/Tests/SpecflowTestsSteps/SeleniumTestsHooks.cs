@@ -40,15 +40,19 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
 
             if (ciDiver == null || ciDiver == "chrome")
             {
-                browser = Browser.Edge;
+                browser = Browser.Chrome;
             }            
             else if (ciDiver == "ieexplorer")
             {
                 browser = Browser.IeExplorer;
             }
-            else
+            else if (ciDiver == "edge")
             {
                 browser = Browser.Edge;
+            }
+            else
+            {
+                browser = Browser.Chrome;
             }
 
             switch (browser)
@@ -66,7 +70,6 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
                 case Browser.Edge:
                     EdgeOptions edgeOptions = new EdgeOptions();
                     edgeOptions.PageLoadStrategy = EdgePageLoadStrategy.Eager;
-                    //edgeOptions.AddAdditionalCapability(); 
                     driver = new EdgeDriver(edgeOptions);
                     break;
                 default:
