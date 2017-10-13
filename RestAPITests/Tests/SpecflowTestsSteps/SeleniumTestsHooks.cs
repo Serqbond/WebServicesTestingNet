@@ -1,6 +1,7 @@
 ﻿using BoDi;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 using System;
@@ -12,11 +13,11 @@ using TechTalk.SpecFlow;
 
 namespace RestAPITests.Tests.SpecflowTestsSteps
 {
-    enum br
+    enum Browser
     {
         Chrome = 1,
-        IeExplorer = 2
-
+        IeExplorer = 2,
+        Edge = 3
     }
 
     [Binding, Scope(Tag = "Selenium")]
@@ -34,33 +35,39 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
         [BeforeScenario]
         public void BeforeScenario()
         {
-            br brows = br.Chrome;
+            Browser browser;
             string ciDiver = Environment.GetEnvironmentVariable("server.driver");
 
-            if (ciDiver == null)
+            if (ciDiver == null || ciDiver == "chrome")
             {
-                brows = br.Chrome;
-            }
-            else if (ciDiver == "chrome")
-            {
-                brows = br.Chrome;
-            }
+                browser = Browser.Edge;
+            }            
             else if (ciDiver == "ieexplorer")
             {
-                brows = br.IeExplorer;
+                browser = Browser.IeExplorer;
+            }
+            else
+            {
+                browser = Browser.Edge;
             }
 
-            switch (brows)
+            switch (browser)
             {
-                case br.Chrome:
+                case Browser.Chrome:
                 driver = new ChromeDriver();
                     break;
-                case br.IeExplorer:
+                case Browser.IeExplorer:
                     InternetExplorerOptions options = new InternetExplorerOptions();
                     options.IgnoreZoomLevel = true;
                     options.PageLoadStrategy = InternetExplorerPageLoadStrategy.Eager;
                     options.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
                     driver = new InternetExplorerDriver(options);
+                    break;
+                case Browser.Edge:
+                    EdgeOptions edgeOptions = new EdgeOptions();
+                    edgeOptions.PageLoadStrategy = EdgePageLoadStrategy.Eager;
+                    //edgeOptions.AddAdditionalCapability(); 
+                    driver = new EdgeDriver(edgeOptions);
                     break;
                 default:
                     driver = new ChromeDriver();
