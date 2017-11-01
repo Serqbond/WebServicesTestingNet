@@ -53,7 +53,9 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
             switch (browser)
             {
                 case Browser.Chrome:
-                driver = new ChromeDriver();
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.AddArguments("start-maximized");
+                    driver = new ChromeDriver(chromeOptions);
                     break;
                 case Browser.IeExplorer:
                     InternetExplorerOptions options = new InternetExplorerOptions();
@@ -61,20 +63,21 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
                     options.PageLoadStrategy = InternetExplorerPageLoadStrategy.Eager;
                     options.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
                     driver = new InternetExplorerDriver(options);
+                    driver.Manage().Window.Maximize();
                     break;
                 case Browser.Edge:
                     EdgeOptions edgeOptions = new EdgeOptions();
                     edgeOptions.PageLoadStrategy = EdgePageLoadStrategy.Eager;
                     driver = new EdgeDriver(edgeOptions);
+                    driver.Manage().Window.Maximize();
                     break;
                 default:
                     driver = new ChromeDriver();
                     break;
             }    
             
-            driver.Manage().Window.Maximize();
+            
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-
             objectContainer.RegisterInstanceAs<IWebDriver>(driver);
         }
 

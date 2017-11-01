@@ -23,7 +23,7 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
         [Given(@"I have a CountryInfo object")]
         public void GivenIHaveACountryInfoObject(Table table)
         {
-            expectedCountryInfo = table.CreateInstance<CountryInfo>();            
+            expectedCountryInfo = table.CreateInstance<CountryInfo>();    
         }
 
         [Given(@"I call service '(.*)' with parameters '(.*)' and '(.*)'")]
