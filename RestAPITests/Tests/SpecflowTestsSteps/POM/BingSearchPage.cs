@@ -18,11 +18,6 @@ namespace RestAPITests.Tests.SpecflowTestsSteps.POM
         public IWebElement SearchResultLink(string textToSearch)
         {
             return driver.FindElement(By.XPath($"//cite[contains(., '{textToSearch}')]"));
-        }
-
-        public IWebElement Boo()
-        {
-            return driver.FindElement(By.CssSelector(""));
-        }
+        }        
     }
 }
