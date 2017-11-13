@@ -50,6 +50,8 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
         [When(@"I press search button on the bing page")]
         public void WhenIPressSearchButtonOnTheBingPage()
         {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementToBeClickable(bingSearchPage.ButtonSearch));
             bingSearchPage.ButtonSearch.Click();
         }
 

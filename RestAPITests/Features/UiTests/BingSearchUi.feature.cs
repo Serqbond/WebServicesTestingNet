@@ -66,27 +66,20 @@ namespace RestAPITests.Features.UiTests
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search in Bing")]
         [NUnit.Framework.CategoryAttribute("Selenium")]
-        [NUnit.Framework.TestCaseAttribute("http://www.bing.com", "visual studio", "www.visualstudio.com", null)]
-        [NUnit.Framework.TestCaseAttribute("http://www.bing.com", "selenium", "docs.seleniumhq.org", null)]
-        public virtual void SearchInBing(string url, string searchedText, string expectedText, string[] exampleTags)
+        public virtual void SearchInBing()
         {
-            string[] @__tags = new string[] {
-                    "Selenium"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search in Bing", @__tags);
-#line 4
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search in Bing", new string[] {
+                        "Selenium"});
+#line 15
 this.ScenarioSetup(scenarioInfo);
-#line 5
- testRunner.Given(string.Format("I open page \'{0}\'", url), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 6
- testRunner.And(string.Format("I have entered \'{0}\' into the bing search field", searchedText), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 7
+#line 16
+ testRunner.Given("I open page \'http://www.bing.com\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 17
+ testRunner.And("I have entered \'visual studio\' into the bing search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 18
  testRunner.When("I press search button on the bing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 8
- testRunner.Then(string.Format("the result should contain \'{0}\' on the bing page", expectedText), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 19
+ testRunner.Then("the result should contain \'www.visualstudio.com\' on the bing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -11,7 +11,7 @@ namespace RestAPITests.Tests
 
         [SetUp]
         public void Setup()
-        {                
+        {
             string baseHost = Environment.GetEnvironmentVariable("server.host");            
 
             if (baseHost == null)

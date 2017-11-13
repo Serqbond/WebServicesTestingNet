@@ -3,14 +3,10 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace RestAPITests.Tests.SpecflowTestsSteps.POM
 {
-    public class BingSearchPage
+    public class BingSearchPage : BasePage
     {
-        private IWebDriver driver;
-
-        public BingSearchPage(IWebDriver driver)
-        {
-            this.driver = driver;
-            PageFactory.InitElements(driver, this);
+        public BingSearchPage(IWebDriver driver) : base(driver)
+        {                       
         }
 
         [FindsBy(How = How.Id, Using = "sb_form_q")]
@@ -22,6 +18,11 @@ namespace RestAPITests.Tests.SpecflowTestsSteps.POM
         public IWebElement SearchResultLink(string textToSearch)
         {
             return driver.FindElement(By.XPath($"//cite[contains(., '{textToSearch}')]"));
+        }
+
+        public IWebElement Boo()
+        {
+            return driver.FindElement(By.CssSelector(""));
         }
     }
 }

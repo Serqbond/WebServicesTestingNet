@@ -8,19 +8,12 @@ using TechTalk.SpecFlow;
 
 namespace RestAPITests.Tests.SpecflowTestsSteps
 {
-    enum Browser
-    {
-        Chrome = 1,
-        IeExplorer = 2,
-        Edge = 3
-    }
-
     [Binding, Scope(Tag = "Selenium")]
     public class SeleniumTestsHooks
     {
         private IWebDriver driver;
-
         private readonly IObjectContainer objectContainer;
+        private Browser browser = Browser.Chrome;
 
         public SeleniumTestsHooks(IObjectContainer objectContainer)
         {
@@ -29,27 +22,33 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
 
         [BeforeScenario]
         public void BeforeScenario()
-        {
-            Browser browser;
+        {            
             string ciDiver = Environment.GetEnvironmentVariable("server.driver");
-
-            if (ciDiver == null || ciDiver == "chrome")
-            {
-                browser = Browser.Chrome;
-            }            
-            else if (ciDiver == "ieexplorer")
+                        
+            if (ciDiver == "ieexplorer")
             {
                 browser = Browser.IeExplorer;
             }
             else if (ciDiver == "edge")
             {
                 browser = Browser.Edge;
-            }
-            else
-            {
-                browser = Browser.Chrome;
-            }
+            }            
 
+            initDriver(browser);
+
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            objectContainer.RegisterInstanceAs<IWebDriver>(driver);
+        }        
+
+        [AfterScenario]
+        public void AfterScenario()
+        {
+            driver.Quit();
+        }
+
+        private void initDriver(Browser browser)
+        {
             switch (browser)
             {
                 case Browser.Chrome:
@@ -74,17 +73,14 @@ namespace RestAPITests.Tests.SpecflowTestsSteps
                 default:
                     driver = new ChromeDriver();
                     break;
-            }    
-            
-            
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            objectContainer.RegisterInstanceAs<IWebDriver>(driver);
+            }
         }
+    }
 
-        [AfterScenario]
-        public void AfterScenario()
-        {
-            driver.Quit();
-        }
+    enum Browser
+    {
+        Chrome = 1,
+        IeExplorer = 2,
+        Edge = 3
     }
 }

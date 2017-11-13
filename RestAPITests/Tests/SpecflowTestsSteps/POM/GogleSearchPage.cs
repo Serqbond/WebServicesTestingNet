@@ -3,22 +3,18 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace RestAPITests.Tests.SpecflowTestsSteps.POM
 {
-    public class GogleSearchPage
+    public class GogleSearchPage : BasePage
     {
-        private IWebDriver driver;
-
-        public GogleSearchPage(IWebDriver driver)
+        public GogleSearchPage(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
-            PageFactory.InitElements(driver, this);
         }
         
         [FindsBy(How = How.Id, Using = "lst-ib")]
-        public IWebElement SerchTextField { get; set; }
+        public IWebElement SerchTextField { get; set; }        
 
         public IWebElement SearchResultLink(string textToSearch)
         {
-            return driver.FindElement(By.XPath($"//a[contains(., '{textToSearch}')]"));
+            return driver.FindElement(By.XPath($"//a[contains(., '{textToSearch}')]"));            
         }
     }
 }

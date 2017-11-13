@@ -117,6 +117,7 @@
     <Compile Include="Tests\Placeholdertests\JsonPlaceholderTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
     <Compile Include="Tests\SpecflowTestsSteps\MixedSearchTestSteps.cs" />
+    <Compile Include="Tests\SpecflowTestsSteps\POM\BasePage.cs" />
     <Compile Include="Tests\SpecflowTestsSteps\POM\BingSearchPage.cs" />
     <Compile Include="Tests\SpecflowTestsSteps\POM\GogleSearchPage.cs" />
     <Compile Include="Tests\SpecflowTestsSteps\Hooks\SearchTestsHook.cs" />
