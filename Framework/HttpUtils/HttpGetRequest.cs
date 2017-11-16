@@ -26,7 +26,9 @@ namespace Framework.HttpUtils
         public T GetResponseAsBusinessEntity<T>(string requestUri) where T : new()
         {
             var result = Client.GetAsync(requestUri).Result.Content.ReadAsStringAsync().Result;
-            return JsonConvert.DeserializeObject<T>(result);
+            return JsonConvert.DeserializeObject<T>(result, 
+                new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore }
+                );
         }
     }
 }

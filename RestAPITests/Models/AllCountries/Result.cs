@@ -8,7 +8,7 @@ namespace RestAPITests.Models.AllCountries
         public string Name { get; set; }
         [JsonProperty("alpha2_code")]
         public string Alpha2_code { get; set; }
-        [JsonProperty("alpha3_code")]
+        [JsonProperty(PropertyName = "alpha3_code", NullValueHandling = NullValueHandling.Ignore)]
         public string Alpha3_code { get; set; }
 
         public Result() { }        
