@@ -105,8 +105,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 14
  testRunner.When("I press search button on google page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 15
- testRunner.Then("the result should contain \'Visual Studio IDE, Code Editor, VSTS, & Mobile Center\'" +
-                    "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the result should contain \'Visual Studio IDE, Code Editor, VSTS, & App Center\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -12,4 +12,4 @@ Scenario: MixedSearchByText
 	Given I open page 'https://www.google.com.ua'
 	And I have entered 'visual studio' into the search field
 	When I press search button on google page
-	Then the result should contain 'Visual Studio IDE, Code Editor, VSTS, & Mobile Center'
+	Then the result should contain 'Visual Studio IDE, Code Editor, VSTS, & App Center'			
