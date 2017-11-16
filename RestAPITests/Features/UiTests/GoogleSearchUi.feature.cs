@@ -66,7 +66,7 @@ namespace RestAPITests.Features.UiTests
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Search in google")]
         [NUnit.Framework.CategoryAttribute("Selenium")]
-        [NUnit.Framework.TestCaseAttribute("https://www.google.com.ua", "visual studio", "Visual Studio IDE, Code Editor, VSTS, & Mobile Center", null)]
+        [NUnit.Framework.TestCaseAttribute("https://www.google.com.ua", "visual studio", "Visual Studio IDE, Code Editor, VSTS, & App Center", null)]
         [NUnit.Framework.TestCaseAttribute("https://www.google.com.ua", "selenium", "Selenium - Web Browser Automation", null)]
         public virtual void SearchInGoogle(string url, string searchedText, string expectedText, string[] exampleTags)
         {

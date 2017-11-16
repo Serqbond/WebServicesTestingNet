@@ -8,5 +8,5 @@ Scenario Outline: Search in google
 	Then the result should contain '<expectedText>'
 	Examples: 
 	| url                       | searchedText  | expectedText                                          |
-	| https://www.google.com.ua | visual studio | Visual Studio IDE, Code Editor, VSTS, & Mobile Center |
+	| https://www.google.com.ua | visual studio | Visual Studio IDE, Code Editor, VSTS, & App Center |
 	| https://www.google.com.ua | selenium      | Selenium - Web Browser Automation                     |
